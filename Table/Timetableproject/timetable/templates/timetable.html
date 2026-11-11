@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Class Timetable</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; margin: 40px; }
+        h1 { text-align: center; color: #333; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 14px 20px; text-align: left; border-bottom: 1px solid #e9ecef; }
+        th {  text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; }
+        tr:hover { background-color: #f1f3f5; }
+        .empty-row { text-align: center; color: #6c757d; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>Class Timetable</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Time Slot</th>
+                <th>Subject</th>
+                <th>Faculty Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in timetable_records %}
+            <tr>
+                <td>{{ record.day }}</td>
+                <td>{{ record.start_time|time:"H:i" }} - {{ record.end_time|time:"H:i" }}</td>
+                <td>{{ record.subject_name }}</td>
+                <td>{{ record.faculty_name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="empty-row">No timetable records found. Please add records via the admin panel.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
